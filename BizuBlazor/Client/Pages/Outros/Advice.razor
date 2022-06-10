@@ -1,0 +1,47 @@
+﻿@page "/advice"
+@inject HttpClient Http
+@inject IToastService toastService
+@using Newtonsoft.Json
+
+<PageTitle>Advice</PageTitle>
+
+<button class="btn btn-info" @onclick="GetAdvice">Pedir conselho</button>
+<br /><br />
+@advice.slip.advice
+
+@code {
+    Conselho advice = new Conselho();
+
+    private async Task GetAdvice()
+    {
+        using (var client = new HttpClient())
+        {
+            try
+            {
+                HttpResponseMessage resposta = await client.GetAsync("https://api.adviceslip.com/advice");
+                string json = await resposta.Content.ReadAsStringAsync();
+                advice = JsonConvert.DeserializeObject<Conselho>(json);
+            }
+            catch (Exception ex)
+            {
+                toastService.ShowError(ex.Message, "Erro ao buscar conselho");
+            }
+        }
+    }
+
+    public class Conselho
+    {
+        public Item slip { get; set; }
+
+        public Conselho()
+        {
+            slip = new Item();
+        }
+    }
+
+    public class Item
+    {
+        public string id { get; set; }
+        public string advice { get; set; }
+    }
+}

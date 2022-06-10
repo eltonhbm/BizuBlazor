@@ -7,8 +7,16 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="https://viacep.com.br/" target="_blank">Sobre</a>
+            <a href="/sobre">Sobre</a>
         </div>
+        
+        <BlazoredToasts Position="Blazored.Toast.Configuration.ToastPosition.BottomRight"
+                Timeout="3"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fa fa-thumbs-up"
+                ErrorIcon="fa fa-bug"
+                ShowProgressBar="true" />
 
         <article class="content px-4">
             @Body

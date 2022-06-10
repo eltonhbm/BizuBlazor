@@ -1,0 +1,25 @@
+﻿@page "/sobre"
+
+<PageTitle>Sobre nós</PageTitle>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h4 class="display-4">Bizu Blazor</h4>
+        <p class="lead">Uma aplicação utilizando integração com APIs públicas.</p>
+        <p class="justify-content-lg-center">Aqui você poderá consultar um endereço através do CEP.</p>
+        <p class="justify-content-lg-center">Futuramente poderá realizar consulta de CNPJs.</p>
+        <p class="justify-content-lg-center">Futuramente poderá fazer outras consultas.</p>
+        <hr />
+        <p class="justify-content-sm-end">Dúvidas ou sugestões:</p>
+        <button class="btn btn-primary" @onclick="AbrirTelaDeAutores">Autores</button>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter] public IModalService Modal { get; set; }
+
+    private void AbrirTelaDeAutores()
+    {
+        Modal.Show<Autores>("Autores do App Bizu");
+    }
+}
